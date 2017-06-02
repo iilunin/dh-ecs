@@ -1,2 +1,4 @@
 .git
-*.terraform.tfstate
+*.terraform.tfstate*
+*.remote_state.tf
+*/.terraform
