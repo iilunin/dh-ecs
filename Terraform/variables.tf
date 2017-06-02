@@ -6,8 +6,13 @@ variable "version" {
   default = "0.0.1"
 }
 
+# TODO: add min/max/desired
 variable "cluster_size" {
-  default = "1"
+  default = "3"
+}
+
+variable "cluster_name" {
+  default = "devicehive"
 }
 
 variable "vpc_cidr_block" {
@@ -15,5 +20,17 @@ variable "vpc_cidr_block" {
 }
 
 variable "az_count" {
-  default = "2"
+  default = "1"
+}
+
+variable "instance_type" {
+  default     = "t2.small"
+}
+
+variable "ecs_ami" {
+  default = "ami-275ffe31"
+}
+
+variable "key_name" {
+  default = ""
 }

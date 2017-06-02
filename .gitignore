@@ -1,4 +1,4 @@
 .git
-*.terraform.tfstate*
-*.remote_state.tf
+*terraform.tfstate*
+*remote_state.tf
 */.terraform
