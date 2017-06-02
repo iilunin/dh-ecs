@@ -2,10 +2,10 @@ provider "aws"{
   region="${var.aws_region}"
 }
 
-variable "aws_region" {
-  default = "us-east-1"
-}
 
-variable "version" {
-  default = "0.0.1"
-}
+
+# #!/bin/bash
+# echo ECS_CLUSTER=testcluster >> /etc/ecs/ecs.config
+#
+# ami-275ffe31
+# AmazonEC2ContainerServiceforEC2Role
