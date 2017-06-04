@@ -8,6 +8,14 @@ variable "version" {
 
 # TODO: add min/max/desired
 variable "cluster_size" {
+  default = "1"
+}
+
+variable "cluster_size_min" {
+  default = "1"
+}
+
+variable "cluster_size_max" {
   default = "3"
 }
 
@@ -20,11 +28,11 @@ variable "vpc_cidr_block" {
 }
 
 variable "az_count" {
-  default = "1"
+  default = "2"
 }
 
 variable "instance_type" {
-  default     = "t2.small"
+  default = "t2.small"
 }
 
 variable "ecs_ami" {
@@ -32,5 +40,5 @@ variable "ecs_ami" {
 }
 
 variable "key_name" {
-  default = ""
+  default = "jupyter"
 }

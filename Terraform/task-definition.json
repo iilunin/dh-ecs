@@ -1,0 +1,13 @@
+[
+  {
+    "essential": true,
+    "image": "${image_url}",
+    "memoryReservation": 200,
+    "name": "${container_name}",
+    "portMappings": [
+      {
+        "containerPort": 80
+      }
+    ]
+  }
+]
