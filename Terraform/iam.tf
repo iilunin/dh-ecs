@@ -30,11 +30,7 @@ resource "aws_iam_role_policy" "ecs_service" {
       "Effect": "Allow",
       "Action": [
         "ec2:Describe*",
-        "elasticloadbalancing:DeregisterInstancesFromLoadBalancer",
-        "elasticloadbalancing:DeregisterTargets",
-        "elasticloadbalancing:Describe*",
-        "elasticloadbalancing:RegisterInstancesWithLoadBalancer",
-        "elasticloadbalancing:RegisterTargets"
+        "elasticloadbalancing:*"
       ],
       "Resource": "*"
     }

@@ -15,7 +15,16 @@ resource "aws_security_group" "node_security_group" {
 		from_port = 0
 		to_port   = 0
 
-		security_groups = ["${aws_security_group.lb_sg.id}"]
+		security_groups = [
+			"${aws_security_group.lb_sg.id}"
+		]
+	}
+
+	ingress {
+		protocol  = -1
+		from_port = 0
+		to_port   = 0
+		self = true
 	}
 
 	ingress {
@@ -26,20 +35,20 @@ resource "aws_security_group" "node_security_group" {
 		cidr_blocks = ["0.0.0.0/0"]
 	}
 
-	ingress {
-		protocol  = "tcp"
-		from_port = 80
-		to_port   = 80
-
-		cidr_blocks = ["0.0.0.0/0"]
-	}
-
-	ingress {
-		protocol  = "icmp"
-		from_port = -1
-		to_port   = -1
-		cidr_blocks = ["0.0.0.0/0"]
-	}
+	# ingress {
+	# 	protocol  = "tcp"
+	# 	from_port = 80
+	# 	to_port   = 80
+	#
+	# 	cidr_blocks = ["0.0.0.0/0"]
+	# }
+	#
+	# ingress {
+	# 	protocol  = "icmp"
+	# 	from_port = -1
+	# 	to_port   = -1
+	# 	cidr_blocks = ["0.0.0.0/0"]
+	# }
 
 	egress {
 		from_port   = 0

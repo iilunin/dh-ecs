@@ -22,44 +22,44 @@ resource "aws_security_group" "nat" {
 	}
 }
 
-resource "aws_eip" "nat" {
-		instance = "${aws_instance.nat.id}"
-		vpc = true
-}
-
-resource "aws_instance" "nat" {
-		ami = "ami-eccf48fa" # this is a special ami preconfigured to do NAT
-		instance_type = "t2.small"
-		vpc_security_group_ids = ["${aws_security_group.nat.id}"]
-		subnet_id = "${aws_subnet.public.0.id}"
-		associate_public_ip_address = true
-		source_dest_check = false
-
-		tags {
-				Name = "VPC NAT Instance"
-		}
-
-		depends_on = ["aws_internet_gateway.igw"]
-}
-
-resource "aws_route" "nat_assoc" {
-	route_table_id 					= "${aws_route_table.private.id}"
-	destination_cidr_block 	= "0.0.0.0/0"
-	instance_id 						= "${aws_instance.nat.id}"
-}
-
-# If decided to use managed nat uncomment code below
-
 # resource "aws_eip" "nat" {
+# 		instance = "${aws_instance.nat.id}"
+# 		vpc = true
 # }
 #
-# resource "aws_nat_gateway" "nat" {
-# 	allocation_id = "${aws_eip.nat.id}"
-# 	subnet_id     = "${aws_subnet.public.0.id}"
+# resource "aws_instance" "nat" {
+# 		ami = "ami-eccf48fa" # this is a special ami preconfigured to do NAT
+# 		instance_type = "t2.small"
+# 		vpc_security_group_ids = ["${aws_security_group.nat.id}"]
+# 		subnet_id = "${aws_subnet.public.0.id}"
+# 		associate_public_ip_address = true
+# 		source_dest_check = false
+#
+# 		tags {
+# 				Name = "VPC NAT Instance"
+# 		}
+#
+# 		depends_on = ["aws_internet_gateway.igw"]
 # }
 #
 # resource "aws_route" "nat_assoc" {
 # 	route_table_id 					= "${aws_route_table.private.id}"
 # 	destination_cidr_block 	= "0.0.0.0/0"
-# 	nat_gateway_id 					= "${aws_nat_gateway.nat.id}"
+# 	instance_id 						= "${aws_instance.nat.id}"
 # }
+
+# If decided to use managed nat uncomment code below
+
+resource "aws_eip" "nat" {
+}
+
+resource "aws_nat_gateway" "nat" {
+	allocation_id = "${aws_eip.nat.id}"
+	subnet_id     = "${aws_subnet.public.0.id}"
+}
+
+resource "aws_route" "nat_assoc" {
+	route_table_id 					= "${aws_route_table.private.id}"
+	destination_cidr_block 	= "0.0.0.0/0"
+	nat_gateway_id 					= "${aws_nat_gateway.nat.id}"
+}

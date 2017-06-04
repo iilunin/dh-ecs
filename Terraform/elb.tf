@@ -6,8 +6,9 @@ resource "aws_alb_target_group" "devicehive_http" {
 }
 
 resource "aws_alb" "main" {
-  name            = "DeviceHive"
-  subnets         = ["${aws_subnet.private.*.id}"]
+  name            = "dh"
+  # subnets         = ["${aws_subnet.private.*.id}"]
+  subnets         = ["${aws_subnet.public.*.id}"]
   security_groups = ["${aws_security_group.lb_sg.id}"]
 }
 
